@@ -1,6 +1,6 @@
 # Weighted Cox Regression
 
-R source code and data associated with the publication *Madjar K and Rahnenführer J (2020): Weighted Cox regression for the prediction of heterogeneous patient subgroups*.
+R source code and data associated with the publication *Madjar K and Rahnenführer J (2020): Weighted Cox regression for the prediction of heterogeneous patient subgroups. arXiv:2003.08965*.
 
 Our method is focused on the situation of predefined, possibly heterogenous subgroups of patients with available survival endpoint and high-dimensional molecular measurements such as gene expression
 data, with the aim of obtaining a separate risk prediction model for each subgroup.
