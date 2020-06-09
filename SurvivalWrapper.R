@@ -177,6 +177,8 @@ SurvivalWrapper <- function(job, data, instance, method.weights,
     }
   }
   
+  print(sessionInfo())
+  
   # Return results
   return(list(cox.Lambda = cox.Lambda,
               cox.Beta = cox.Beta,
