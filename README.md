@@ -1,7 +1,7 @@
 # Weighted Cox Regression
 
-R source code and data associated with the publication *Madjar K and Rahnenführer J (2020): Weighted Cox regression for the prediction of heterogeneous patient subgroups. arXiv:2003.08965*.
-
+<!---R source code and data associated with the publication *Madjar K and Rahnenführer J (2020): Weighted Cox regression for the prediction of heterogeneous patient subgroups. arXiv:2003.08965*.
+-->
 Our method is focused on the situation of predefined, possibly heterogenous subgroups of patients with available survival endpoint and high-dimensional molecular measurements such as gene expression
 data, with the aim of obtaining a separate risk prediction model for each subgroup.
 For this purpose, we propose a l1-penalized Cox regression model with a weighted version of the partial likelihood that includes patients of all subgroups but assigns them individual weights.
@@ -10,6 +10,8 @@ We compare our approach to fixed weights and unweighted Cox models in simulation
 
 
 The main file to run the simulation study is **Run_Simulation.R** and the main file for the real data application is **Run_RealDataApplication.R**.
+
+Figures and tables can be generated based on the results collected in **Collect_Results.R**.
 
 
 ## Overview of R files:
@@ -50,6 +52,11 @@ Function to determine individual weights for each patient in the training set an
 #### CoxModelBuilder.R
 
 Function to fit (weighted) l1-penalized Cox model.
+
+#### Collect_Results.R
+
+Collect and save all results from the simulations and the real data application (these results were used for the figures and tables in the corresponding publication).
+
 
 ## Data:
 
