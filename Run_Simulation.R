@@ -3,16 +3,16 @@
 library("batchtools")
 
 # Batchtools registry to save all information regarding computational jobs and all results
-reg <- makeExperimentRegistry(file.dir = "Simulation" )  
+reg <- makeExperimentRegistry(file.dir = "Simulation", 
+                              seed     = 17420 # for Biometrical Journal
+#                             seed     = 21472 # for arXiv Submission
+                              )  
 
 # Parameter combinations for data simulation
 VP <- expand.grid(n = c(seq(20,100,10),200,500,1000),
                   p = c(12,100,200),  
-                 epsilon = c(seq(0,0.5,0.1),1) )
+                  epsilon = c(seq(0,0.5,0.1),1) )
 
-# Set true effects of first prognostic genes in both groups:
-beta1 = c(1,1,0,0, -0.5, 0.5, 0.75,0.25, -1,-1,-0.75,-0.25)
-beta2 = c(0,0,1,1,  0.5,-0.5, 0.25,0.75, -1,-1,-0.75,-0.25)
 
 # "Problem" function in batchtools that creates problem instance (here: generation of training
 # and test data) used in the "algorithmic" function below. 
@@ -21,6 +21,10 @@ prob.fun = function( n, p, epsilon, ...){
   
   mu1 = 4+2*epsilon # mean value for medium effect of absolute size 0.5 or 0.75
   mu2 = 4+4*epsilon # mean value for strong effect of absolute size 1
+  
+  # Set true effects of first prognostic genes in both groups:
+  beta1 = c(1,1,0,0, -0.5, 0.5, 0.75,0.25, -1,-1,-0.75,-0.25)
+  beta2 = c(0,0,1,1,  0.5,-0.5, 0.25,0.75, -1,-1,-0.75,-0.25)
   
   Traindata = sim.cohorts(N = rep(n,4), P = p,  
                            effect1 = beta1, effect2 = beta2,
@@ -52,7 +56,8 @@ names(prob.designs)[1] = "Simdata"
 addProblem(name  = "Simdata",
            data  = NULL,
            fun   = prob.fun,
-           seed  = 20181128
+           seed  = 174 # for Biometrical Journal
+#           seed  = 20181128 # for arXiv Submission
 )
 
 source("SurvivalWrapper.R") # Algorithm function 

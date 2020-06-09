@@ -7,7 +7,10 @@ library("batchtools")
 load("data/Realdata_LC.RData")  
 
 # Batchtools registry to save all information regarding computational jobs and all results
-reg = makeExperimentRegistry(file.dir = "Sim_Realdata_LC" )  
+reg = makeExperimentRegistry(file.dir = "Lungcancer", 
+                             seed     = 24420 # for Biometrical Journal
+#                            seed     = 251157152 # for arXiv Submission
+                             )  
 
 # "Problem" function in batchtools that creates problem instance (here: stratified subsampling 
 # and generation of training and test data) used in the "algorithmic" function below. 
@@ -20,7 +23,9 @@ names(prob.designs)[1] = "subsampling"
 addProblem(name = "subsampling", 
            data = Data, 
            fun = StratifiedSubsampling, 
-           seed = 16032018 )
+           seed  = 244 # for Biometrical Journal
+#          seed  = 16032018 # for arXiv Submission
+           )
 
 source("SurvivalWrapper.R") # Algorithm function 
 addAlgorithm(name  = "survival", fun = SurvivalWrapper)
@@ -29,8 +34,8 @@ addAlgorithm(name  = "survival", fun = SurvivalWrapper)
 # of covariates are also possible, but here only "genes" are used)
 surv.design = CJ(
   method.weights = c("all", "sub", "lasso", "ridge", "rF", seq(0.1,0.9,0.1)),
-  gene.filter = c("all", "Top1000Varianz", "prognostic"),
-  covariates = "genes" # can be one of c("genes", "clin", "clin+genes")
+  gene.filter    = c("all", "Top1000Varianz", "prognostic"),
+  covariates     = "genes" # can be one of c("genes", "clin", "clin+genes")
 )
 
 algo.designs = list(survival = surv.design)
